@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr><th>LeetCodeUrl</th><th>Time Complexity</th><th>Space Complexity</th><th>Link</th><th>Tag</th></tr>
+    </thead>
+    <tbody>
+        <tr><td> <a href="https://leetcode.com/problems/gas-station/">134. Gas Station</a> </td><td> O(n) </td><td> O(n) </td><td> <a href="leetcode/leetcode_101_200/q134_gas_station.py">View</a> </td><td> Greedy </td></tr>
+<tr><td> <a href="https://leetcode.com/problems/lru-cache/">146. LRU Cache</a> </td><td> N/A </td><td> N/A </td><td> <a href="leetcode/leetcode_101_200/q146_lru_cache.py">View</a> </td><td> Linked List </td></tr>
+    </tbody>
+</table>
+
+<script>
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.querySelector("table");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < rows.length - 1; i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch= true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount ++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+document.querySelectorAll("th").forEach((header, index) => {
+    header.addEventListener("click", function() {
+        sortTable(index);
+    });
+});
+    
+// JavaScript sorting function here
+</script>
+
+</body>
+</html>
+    

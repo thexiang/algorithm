@@ -2,6 +2,7 @@
 # Question Name: 146. LRU Cache
 # Time Complexity: N/A
 # Space Complexity: N/A
+# Tag: Linked List
 
 class DoublyLinkedListNode():
     def __init__(self, key=0, value=0):

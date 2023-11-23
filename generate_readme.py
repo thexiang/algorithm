@@ -6,6 +6,7 @@ def extract_metadata(file_path):
         'Question Name': 'N/A', 
         'Time Complexity': 'N/A', 
         'Space Complexity': 'N/A',
+        'Tag': 'N/A',
     }
     try:
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -18,13 +19,15 @@ def extract_metadata(file_path):
                     metadata['Time Complexity'] = line.split(':', 1)[1].strip()
                 elif line.startswith('# Space Complexity:'):
                     metadata['Space Complexity'] = line.split(':', 1)[1].strip()
+                elif line.startswith('# Tag:'):
+                    metadata['Tag'] = line.split(':', 1)[1].strip()
     except UnicodeDecodeError:
         print(f"Warning: Could not decode {file_path}. Skipping.")
     return metadata
 
 def generate_markdown_table(root_directory):
-    markdown_table = "| LeetCodeUrl | Time Complexity | Space Complexity | Link |\n"
-    markdown_table += "|-------------|-----------------|------------------|------|\n"
+    markdown_table = "| LeetCodeUrl | Time Complexity | Space Complexity | Link | Tag |\n"
+    markdown_table += "|-------------|-----------------|------------------|------|-------|\n"
     for subdir, _, files in os.walk(root_directory):
         for filename in files:
             if filename.endswith('.py'):
@@ -33,7 +36,7 @@ def generate_markdown_table(root_directory):
                 relative_path = os.path.relpath(file_path, root_directory)
                 link = f"[View]({root_directory}/{relative_path.replace(os.sep, '/')})"  
                 leetcode_url = f"[{metadata['Question Name']}]({metadata['LeetCodeUrl']})"
-                markdown_table += f"| {leetcode_url} | {metadata['Time Complexity']} | {metadata['Space Complexity']} | {link} |\n"
+                markdown_table += f"| {leetcode_url} | {metadata['Time Complexity']} | {metadata['Space Complexity']} | {link} | {metadata['Tag']} |\n"
     return markdown_table
 
 def write_to_readme(root_directory, markdown_table):

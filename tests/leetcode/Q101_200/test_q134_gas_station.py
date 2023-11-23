@@ -1,4 +1,4 @@
-from leetcode.leetcode_101_200.q134_gas_station import Solution
+from leetcode.Q101_200.q134_gas_station import Solution
 
 def test_example1():
     assert Solution().canCompleteCircuit([1, 2, 3, 4, 5], [3, 4, 5, 1, 2]) == 3

@@ -1,4 +1,4 @@
-from leetcode.leetcode_101_200.q146_lru_cache import LRUCache
+from leetcode.Q101_200.q146_lru_cache import LRUCache
 
 def test_lru():
     """Explanation
